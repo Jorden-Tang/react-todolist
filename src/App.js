@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React ,{useEffect, useState} from 'react';
 import './App.css';
+import TodoList from "./components/ToDoList";
+import Wrapper from "./components/Wrapper"
+import NavBar from "./components/NavBar"
+import FormWrapper from "./components/FormWrapper"
+import {UserProvider, UserContext, UserConsumner} from "./context/UserContext"
 
 function App() {
+
+  const [state, setState] = useState({
+    userName: ""
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserProvider value = {{appState: state, appSetState: setState}}>
+        <Wrapper>
+          <NavBar></NavBar>
+          <FormWrapper></FormWrapper>
+        </Wrapper>
+      </UserProvider>
     </div>
   );
 }
